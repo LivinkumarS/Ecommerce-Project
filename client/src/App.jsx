@@ -17,8 +17,15 @@ import ShoppingListing from "./pages/shopping-view/listing";
 import ShoppingAccount from "./pages/shopping-view/account";
 import ChechAuth from "./components/common/chechAuth";
 import UnAuthPage from "./pages/un-auth";
+import { useSelector } from "react-redux";
 
 export default function App() {
+
+  const authData=useSelector(state=>state.auth)
+
+  console.log(authData);
+  
+
   const isAuthenticated = false;
   const user = null;
 

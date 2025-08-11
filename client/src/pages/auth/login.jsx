@@ -18,7 +18,7 @@ export default function LoginPage() {
           Log in to your account
         </h1>
         <p>
-          Don't have an account? <Link to={"/auth/register"}>Register</Link>
+          Don't have an account? <Link className="text-blue-400" to={"/auth/register"}>Register</Link>
         </p>
       </div>
 
