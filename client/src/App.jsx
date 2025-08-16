@@ -21,10 +21,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast, Toaster } from "sonner";
 import { setLoading, clearUser, setUser } from "./store/auth-slice";
 import axios from "axios";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function App() {
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { isAuthenticated, user, isLoading } = useSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -54,6 +57,31 @@ export default function App() {
 
     checkAuth();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="space-y-6 p-6 max-h-[100vh]">
+        <Skeleton className="h-[200px] sm:h-400px w-full rounded-2xl" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Skeleton className="h-[50px] sm:h-[200px] w-full rounded-2xl" />
+          <Skeleton className="h-[50px] sm:h-[200px] w-full rounded-2xl" />
+          <Skeleton className="h-[50px] sm:h-[200px] w-full rounded-2xl" />
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div className="lg:col-span-3 space-y-4">
+            <Skeleton className="h-[150px] w-full rounded-xl" />
+            <Skeleton className="h-[150px] w-full rounded-xl" />
+            <Skeleton className="h-[150px] w-full rounded-xl" />
+          </div>
+          <div className="space-y-4">
+            <Skeleton className="h-[80px] w-full rounded-xl" />
+            <Skeleton className="h-[80px] w-full rounded-xl" />
+            <Skeleton className="h-[80px] w-full rounded-xl" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
