@@ -20,6 +20,7 @@ export default function CommonForm({
       case "input":
         element = (
           <Input
+            required={controlItem.required}
             name={controlItem.name}
             placeholder={controlItem.placeholder}
             id={controlItem.name}
@@ -36,6 +37,7 @@ export default function CommonForm({
       case "textarea":
         element = (
           <Textarea
+            required={controlItem.required}
             name={controlItem.name}
             placeholder={controlItem.placeholder}
             id={controlItem.id}
@@ -52,6 +54,7 @@ export default function CommonForm({
         element = (
           <Select
             value={value}
+            required={controlItem.required}
             onValueChange={(value) => {
               setFormData((prev) => {
                 return { ...prev, [controlItem.name]: value };
@@ -77,6 +80,7 @@ export default function CommonForm({
       default:
         element = (
           <Input
+            required={controlItem.required}
             name={controlItem.name}
             placeholder={controlItem.placeholder}
             id={controlItem.name}
@@ -99,9 +103,7 @@ export default function CommonForm({
       <div className="flex flex-col gap-3">
         {formControls.map((controlItem) => (
           <div key={controlItem.name} className="w-full grid gap-1.5">
-            <label className="mb-1">
-              {controlItem.label}
-            </label>
+            <label className="mb-1">{controlItem.label}</label>
             {renderInputByComponentType(controlItem)}
           </div>
         ))}

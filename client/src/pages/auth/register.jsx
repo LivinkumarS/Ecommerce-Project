@@ -3,10 +3,12 @@ import { registerFormControl } from "@/config";
 import { setLoading } from "@/store/auth-slice";
 import axios from "axios";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function RegisterPage() {
+  const { isLoading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,18 +26,19 @@ export default function RegisterPage() {
       const response = await axios.post(
         "http://localhost:5000/api/auth/register",
         formData,
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
 
-      if ((response.statusText = "OK")) {
-        console.log(response.data.message);
+      if (response?.data?.success) {
+        toast.success(response.data.message);
         navigate("/auth/login");
+      } else {
+        toast.error(response.data.message);
       }
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.response?.data?.message || error.message);
     }
+
     dispatch(setLoading(false));
   };
 
@@ -58,7 +61,7 @@ export default function RegisterPage() {
         formControls={registerFormControl}
         setFormData={setFormData}
         onSubmit={onSubmit}
-        buttunText={"Register"}
+        buttunText={isLoading ? "Loading..." : "Register"}
       />
     </div>
   );

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import AuthLayout from "./components/auth/layout";
 import LoginPage from "./pages/auth/login";
 import RegisterPage from "./pages/auth/register";
@@ -17,21 +17,49 @@ import ShoppingListing from "./pages/shopping-view/listing";
 import ShoppingAccount from "./pages/shopping-view/account";
 import ChechAuth from "./components/common/chechAuth";
 import UnAuthPage from "./pages/un-auth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast, Toaster } from "sonner";
+import { setLoading, clearUser, setUser } from "./store/auth-slice";
+import axios from "axios";
 
 export default function App() {
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
 
-  const authData=useSelector(state=>state.auth)
+  useEffect(() => {
+    const checkAuth = async () => {
+      dispatch(setLoading(true));
+      try {
+        const res = await axios.get(
+          "http://localhost:5000/api/auth/check-auth",
+          {
+            withCredentials: true,
+            headers: {
+              "Cache-Control":
+                "no-store,no-cache,must-revalidate,proxy-revalidate",
+              Expires: "0",
+            },
+          }
+        );
 
-  console.log(authData);
-  
+        if (res?.data?.success) {
+          dispatch(setUser(res.data.user));
+        }
+      } catch (error) {
+        dispatch(clearUser());
+      } finally {
+        dispatch(setLoading(false));
+      }
+    };
 
-  const isAuthenticated = false;
-  const user = null;
+    checkAuth();
+  }, []);
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
+      <Toaster position="top-center" />
       <Routes>
+        <Route path="/" element={<Navigate to="/shop/home" />} />
         <Route
           path="/auth"
           element={
