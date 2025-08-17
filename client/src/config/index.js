@@ -1,3 +1,10 @@
+import {
+  BadgeCheck,
+  LayoutDashboard,
+  ListOrdered,
+  ShoppingBasket,
+} from "lucide-react";
+
 export const registerFormControl = [
   {
     name: "userName",

@@ -84,6 +84,8 @@ export const loginUser = async (req, res) => {
       .cookie("token", token, {
         httpOnly: true,
         secure: false,
+        sameSite: "Lax",
+        path: "/",
         maxAge: 1000 * 60 * 60 * 24,
       })
       .json({
@@ -104,10 +106,17 @@ export const loginUser = async (req, res) => {
 };
 
 export const userLogout = async (req, res) => {
-  res
-    .status(400)
-    .clearCookie("token")
-    .json({ message: "Loggedout Successfully", success: true });
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "Lax",
+    path: "/",
+  });
+
+  return res.status(200).json({
+    success: true,
+    message: "Logged out successfully",
+  });
 };
 
 export const authMiddleware = async (req, res, next) => {

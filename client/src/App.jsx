@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import AuthLayout from "./components/auth/layout";
 import LoginPage from "./pages/auth/login";
 import RegisterPage from "./pages/auth/register";
@@ -24,6 +24,7 @@ import axios from "axios";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function App() {
+  const path = useLocation();
   const dispatch = useDispatch();
   const { isAuthenticated, user, isLoading } = useSelector(
     (state) => state.auth
@@ -58,7 +59,7 @@ export default function App() {
     checkAuth();
   }, []);
 
-  if (isLoading) {
+  if (isLoading && !path.pathname.includes("auth")) {
     return (
       <div className="space-y-6 p-6 max-h-[100vh]">
         <Skeleton className="h-[200px] sm:h-400px w-full rounded-2xl" />
@@ -85,9 +86,9 @@ export default function App() {
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
-      <Toaster position="top-center" />
+      <Toaster position="top-center" autoClose={3000} />
       <Routes>
-        <Route path="/" element={<Navigate to="/shop/home" />} />
+        <Route path="/" element={<Navigate to="/auth/login" />} />
         <Route
           path="/auth"
           element={
