@@ -1,10 +1,3 @@
-import {
-  BadgeCheck,
-  LayoutDashboard,
-  ListOrdered,
-  ShoppingBasket,
-} from "lucide-react";
-
 export const registerFormControl = [
   {
     name: "userName",
@@ -47,5 +40,66 @@ export const loginFormControl = [
     componentType: "input",
     type: "password",
     required: true,
+  },
+];
+
+export const addProductElements = [
+  {
+    label: "Title",
+    name: "title",
+    componentType: "input",
+    type: "text",
+    placeholder: "Enter Product Title",
+  },
+  {
+    label: "Description",
+    name: "description",
+    componentType: "textarea",
+    placeholder: "Enter Product Description",
+  },
+  {
+    label: "Category",
+    name: "category",
+    componentType: "select",
+    options: [
+      { id: "men", label: "Men" },
+      { id: "women", label: "Women" },
+      { id: "kids", label: "Kids" },
+      { id: "accessories", label: "Accessories" },
+      { id: "footwear", label: "Footwear" },
+    ],
+  },
+  {
+    label: "Brand",
+    name: "brand",
+    componentType: "select",
+    options: [
+      { id: "nike", label: "Nike" },
+      { id: "adidas", label: "Adidas" },
+      { id: "puma", label: "Puma" },
+      { id: "levi", label: "Levi" },
+      { id: "zara", label: "Zara" },
+    ],
+  },
+  {
+    label:"Price",
+    name:"price",
+    componentType:"input",
+    type:"number",
+    placeholder:"Enter Product Price"
+  },
+  {
+    label:"Sale Price",
+    name:"saleprice",
+    componentType:"input",
+    type:"number",
+    placeholder:"Enter Product Sale Price (Optional)"
+  },
+  {
+    label:"Total Stock",
+    name:"totalstock",
+    componentType:"input",
+    type:"number",
+    placeholder:"Enter Total Stock"
   },
 ];

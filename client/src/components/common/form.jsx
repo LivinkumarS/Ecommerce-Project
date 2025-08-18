@@ -62,11 +62,11 @@ export default function CommonForm({
             }}
           >
             <SelectTrigger className={"w-full"}>
-              <SelectValue placeholder={controlItem.placeholder}></SelectValue>
+              <SelectValue placeholder={controlItem.label}></SelectValue>
             </SelectTrigger>
             <SelectContent>
               {controlItem.options && controlItem.options.length > 0
-                ? controlItem.map((option) => (
+                ? controlItem.options.map((option) => (
                     <SelectItem key={option.id} value={option.id}>
                       {option.label}
                     </SelectItem>
