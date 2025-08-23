@@ -6,9 +6,9 @@ import AdminHeader from "./header";
 export default function AdminLayout() {
   const [open, setOpen] = useState(false);
   return (
-    <div className="flex min-h-full w-full">
+    <div className="flex min-h-[100vh] w-full">
       {/* Admin Sidebar */}
-      <AdminSidebar open={open} setOpen={setOpen} />
+      <AdminSidebar className="min-h-full" open={open} setOpen={setOpen} />
       <div className="flex flex-1 flex-col">
         {/* Admin Header */}
         <AdminHeader setOpen={setOpen}/>

@@ -50,12 +50,14 @@ export const addProductElements = [
     componentType: "input",
     type: "text",
     placeholder: "Enter Product Title",
+    required: true,
   },
   {
     label: "Description",
     name: "description",
     componentType: "textarea",
     placeholder: "Enter Product Description",
+    required: true,
   },
   {
     label: "Category",
@@ -68,6 +70,7 @@ export const addProductElements = [
       { id: "accessories", label: "Accessories" },
       { id: "footwear", label: "Footwear" },
     ],
+    required: true,
   },
   {
     label: "Brand",
@@ -80,26 +83,30 @@ export const addProductElements = [
       { id: "levi", label: "Levi" },
       { id: "zara", label: "Zara" },
     ],
+    required: true,
   },
   {
-    label:"Price",
-    name:"price",
-    componentType:"input",
-    type:"number",
-    placeholder:"Enter Product Price"
+    label: "Price",
+    name: "price",
+    componentType: "input",
+    type: "number",
+    placeholder: "Enter Product Price",
+    required: true,
   },
   {
-    label:"Sale Price",
-    name:"saleprice",
-    componentType:"input",
-    type:"number",
-    placeholder:"Enter Product Sale Price (Optional)"
+    label: "Sale Price",
+    name: "saleprice",
+    componentType: "input",
+    type: "number",
+    placeholder: "Enter Product Sale Price (Optional)",
+    required: true,
   },
   {
-    label:"Total Stock",
-    name:"totalstock",
-    componentType:"input",
-    type:"number",
-    placeholder:"Enter Total Stock"
+    label: "Total Stock",
+    name: "totalstock",
+    componentType: "input",
+    type: "number",
+    placeholder: "Enter Total Stock",
+    required: true,
   },
 ];

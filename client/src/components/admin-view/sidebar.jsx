@@ -29,12 +29,6 @@ export default function AdminSidebar({ open, setOpen }) {
       path: "/admin/orders",
       icon: <ListOrdered />,
     },
-    {
-      id: "features",
-      label: "Features",
-      path: "/admin/features",
-      icon: <BadgeCheck />,
-    },
   ];
 
   const navigate = useNavigate();

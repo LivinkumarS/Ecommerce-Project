@@ -1,13 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@radix-ui/react-select";
+import axios from "axios";
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 export default function ImageUpload({
   file,
   setFile,
   uploadImageUrl,
+  imageLoadingState,
   setUploadImageUrl,
+  setImageLoadingState,
 }) {
   const inputRef = useRef(null);
 
@@ -33,6 +37,25 @@ export default function ImageUpload({
     }
   }
 
+  useEffect(() => {
+    const uploadImageToCloudinary = async () => {
+      setImageLoadingState(true);
+      const data = new FormData();
+      data.append("my_file", file);
+
+      const response = await axios.post(
+        "http://localhost:5000/api/admin/products/upload-image",
+        data
+      );
+      if (response?.data?.success) {
+        setUploadImageUrl(response?.data?.result?.url);
+        setImageLoadingState(false);
+      }
+    };
+
+    if (file !== null) uploadImageToCloudinary();
+  }, [file]);
+
   return (
     <div className="w-full max-w-md mx-auto">
       <label className="text-lg font-semibold mb-2 block">Upload Image</label>
@@ -55,7 +78,9 @@ export default function ImageUpload({
           >
             <UploadCloudIcon className="w-10 h-10" /> <span>Upload Image</span>
           </label>
-        ) : (
+        ) : ( 
+          imageLoadingState?(<Skeleton className="h-10 bg-gray-500"/>):
+          
           <div className="flex items-center justify-center">
             <div className="flex items-center">
               <FileIcon className="w-7 h-7 text-primary mr-2" />

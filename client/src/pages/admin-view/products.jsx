@@ -9,7 +9,7 @@ import {
 import { addProductElements } from "@/config";
 import React, { useState } from "react";
 import { toast } from "sonner";
-import ImageUpload from "./imageUpload";
+import ImageUpload from "../../components/admin-view/imageUpload";
 
 export default function AdminProducts() {
   const [createNewProductData, setCreateNewProductData] = useState({
@@ -19,13 +19,14 @@ export default function AdminProducts() {
     category: "",
     brand: "",
     price: "",
-    saleprice: "",
-    totalstock: "",
+    salePrice: "",
+    totalStock: "",
   });
   const [openCreateProducts, setOpenCreateProducts] = useState(false);
 
   const [imageFile, setImageFile] = useState(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [imageLoadingState, setImageLoadingState] = useState(false);
 
   const controlFormSubmit = (e) => {
     e.preventDefault();
@@ -57,9 +58,11 @@ export default function AdminProducts() {
 
           <ImageUpload
             file={imageFile}
+            imageLoadingState={imageLoadingState}
             setFile={setImageFile}
             uploadImageUrl={uploadedImageUrl}
             setUploadImageUrl={setUploadedImageUrl}
+            setImageLoadingState={setImageLoadingState}
           />
 
           <div className="py-6">
