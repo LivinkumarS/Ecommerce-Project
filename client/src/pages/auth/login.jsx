@@ -10,6 +10,7 @@ import { toast } from "sonner";
 export default function LoginPage() {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
+  const [noSubmit, setNoSubmit] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,6 +18,7 @@ export default function LoginPage() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setNoSubmit(true);
     dispatch(setLoading(true));
     try {
       const res = await axios.post(
@@ -35,12 +37,15 @@ export default function LoginPage() {
       if (res?.data?.success) {
         toast.success(res.data.message);
         dispatch(setUser(res.data.user));
+        setNoSubmit(false);
       } else {
         toast.error(res.data.message);
+        setNoSubmit(false);
       }
     } catch (error) {
       toast.error(error.response?.data?.message);
     }
+    setNoSubmit(false);
     dispatch(setLoading(false));
   };
 
@@ -64,6 +69,7 @@ export default function LoginPage() {
         setFormData={setFormData}
         onSubmit={onSubmit}
         buttunText={isLoading ? "Loading..." : "Log in"}
+        noSubmit={noSubmit}
       />
     </div>
   );

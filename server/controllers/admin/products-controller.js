@@ -15,6 +15,12 @@ export const handleImageUpload = async (req, res) => {
 };
 
 export const addNewProduct = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({
+      success: true,
+      message: "Unauthorized!",
+    });
+  }
   const {
     image,
     title,
@@ -37,7 +43,7 @@ export const addNewProduct = async (req, res) => {
       totalStock,
     });
     await newProduct.save();
-    res.status(400).json({
+    res.status(201).json({
       message: "Product added successfully!",
       success: true,
       data: newProduct,
@@ -59,6 +65,12 @@ export const fetchAllProducts = async (req, res) => {
 };
 
 export const editProduct = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({
+      success: true,
+      message: "Unauthorized!",
+    });
+  }
   const {
     image,
     title,
@@ -103,6 +115,12 @@ export const editProduct = async (req, res) => {
 };
 
 export const deleteProduct = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({
+      success: true,
+      message: "Unauthorized!",
+    });
+  }
   try {
     const { id } = req.params;
 

@@ -11,6 +11,7 @@ export default function CommonForm({
   setFormData,
   onSubmit,
   buttunText,
+  noSubmit,
 }) {
   const renderInputByComponentType = (controlItem) => {
     let element = null;
@@ -109,7 +110,7 @@ export default function CommonForm({
         ))}
       </div>
 
-      <Button type="submit" className={"mt-2 w-full"}>
+      <Button disabled={noSubmit} type="submit" className={"mt-2 w-full"}>
         {buttunText || "Submit"}
       </Button>
     </form>

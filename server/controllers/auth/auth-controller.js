@@ -123,7 +123,7 @@ export const authMiddleware = async (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
     return res.status(201).json({
-      message: "Log in to access this page!",
+      message: "Not Authenticated!",
       success: false,
     });
   }
@@ -133,8 +133,8 @@ export const authMiddleware = async (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
-    res.status(401).json({
-      message: "Unauthorized",
+    res.status(500).json({
+      message: "Something went wrong",
       success: false,
     });
   }

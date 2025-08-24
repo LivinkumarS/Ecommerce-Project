@@ -11,6 +11,7 @@ export default function RegisterPage() {
   const { isLoading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [noSubmit, setNoSubmit] = useState(false);
 
   const [formData, setFormData] = useState({
     userName: "",
@@ -20,6 +21,7 @@ export default function RegisterPage() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setNoSubmit(true);
     dispatch(setLoading(true));
 
     try {
@@ -32,13 +34,16 @@ export default function RegisterPage() {
       if (response?.data?.success) {
         toast.success(response.data.message);
         navigate("/auth/login");
+        setNoSubmit(false);
       } else {
         toast.error(response.data.message);
+        setNoSubmit(false);
       }
     } catch (error) {
       toast.error(error.response?.data?.message || error.message);
     }
 
+    setNoSubmit(false);
     dispatch(setLoading(false));
   };
 
@@ -62,6 +67,7 @@ export default function RegisterPage() {
         setFormData={setFormData}
         onSubmit={onSubmit}
         buttunText={isLoading ? "Loading..." : "Register"}
+        noSubmit={noSubmit}
       />
     </div>
   );

@@ -12,7 +12,7 @@ export default function AdminLayout() {
       <div className="flex flex-1 flex-col">
         {/* Admin Header */}
         <AdminHeader setOpen={setOpen}/>
-        <main className="flex-1 flex bg-gray-100/40 p-4 md:p-6">
+        <main className="flex-1 bg-gray-100/40 p-4 md:p-6">
           <Outlet />
         </main>
       </div>

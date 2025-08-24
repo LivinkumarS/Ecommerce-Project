@@ -95,7 +95,7 @@ export const addProductElements = [
   },
   {
     label: "Sale Price",
-    name: "saleprice",
+    name: "salePrice",
     componentType: "input",
     type: "number",
     placeholder: "Enter Product Sale Price (Optional)",
@@ -103,7 +103,7 @@ export const addProductElements = [
   },
   {
     label: "Total Stock",
-    name: "totalstock",
+    name: "totalStock",
     componentType: "input",
     type: "number",
     placeholder: "Enter Total Stock",
