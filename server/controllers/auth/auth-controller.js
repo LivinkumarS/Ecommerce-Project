@@ -74,6 +74,7 @@ export const loginUser = async (req, res) => {
         id: checkuser._id,
         email: checkuser.email,
         role: checkuser.role,
+        userName: checkuser.userName,
       },
       "Ecommerce_Project_Saala",
       { expiresIn: "1d" }
@@ -95,6 +96,7 @@ export const loginUser = async (req, res) => {
           email: checkuser.email,
           role: checkuser.role,
           id: checkuser._id,
+          userName: checkuser.userName,
         },
       });
   } catch (error) {

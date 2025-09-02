@@ -4,7 +4,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRouter from "./routes/auth/auth-routes.js";
-import adminProductRouter from './routes/admin/products-routes.js'
+import adminProductRouter from "./routes/admin/products-routes.js";
+import shopProductRouter from "./routes/shop/shop-routes.js";
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRouter);
 app.use("/api/admin/products", adminProductRouter);
+app.use("/api/shop/products/", shopProductRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on ${port} now!`);

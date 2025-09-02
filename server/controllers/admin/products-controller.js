@@ -15,7 +15,7 @@ export const handleImageUpload = async (req, res) => {
 };
 
 export const addNewProduct = async (req, res) => {
-  if (!req.user) {
+  if (!req.user=="admin") {
     return res.status(401).json({
       success: true,
       message: "Unauthorized!",
@@ -65,7 +65,7 @@ export const fetchAllProducts = async (req, res) => {
 };
 
 export const editProduct = async (req, res) => {
-  if (!req.user) {
+  if (!req.user=="admin") {
     return res.status(401).json({
       success: true,
       message: "Unauthorized!",
@@ -115,7 +115,7 @@ export const editProduct = async (req, res) => {
 };
 
 export const deleteProduct = async (req, res) => {
-  if (!req.user) {
+  if (!req.user=="admin") {
     return res.status(401).json({
       success: true,
       message: "Unauthorized!",

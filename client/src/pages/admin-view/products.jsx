@@ -16,7 +16,7 @@ import {
   addNewProduct,
   editProduct,
   fetchAllProducts,
-} from "@/store/products-slice";
+} from "@/store/admin/products-slice";
 import AdminProductTile from "@/components/admin-view/product-tile";
 import { Skeleton } from "@/components/ui/skeleton";
 

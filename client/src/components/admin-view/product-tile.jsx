@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { Button } from "../ui/button";
-import { deleteProduct, fetchAllProducts } from "@/store/products-slice";
+import { deleteProduct, fetchAllProducts } from "@/store/admin/products-slice";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 
