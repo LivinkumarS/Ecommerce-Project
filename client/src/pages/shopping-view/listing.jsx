@@ -42,11 +42,12 @@ function createsearchParamHelper(filters, searchTerm) {
 
 export default function ShoppingListing() {
   const dispatch = useDispatch();
-  const { productList, isLoading } = useSelector((state) => state.shopProducts);
+  const { productList, isLoading, productDetails } = useSelector((state) => state.shopProducts);
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
+
 
   function handleSort(value) {
     setSort(value);

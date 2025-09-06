@@ -48,11 +48,26 @@ export const fetchFilteredProducts = async (req, res) => {
       break;
   }
 
-  
-
   try {
     const allProducts = await Product.find(filters).sort(sort);
     res.status(201).json({ success: true, data: allProducts });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Something went wrong" });
+  }
+};
+
+export const fetchProductDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const productDetails = await Product.findById(id);
+    if (productDetails._id) {
+      return res.status(201).json({ success: true, data: productDetails });
+    } else {
+      return res
+        .status(401)
+        .json({ success: false, message: "Product not found" });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Something went wrong" });

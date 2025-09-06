@@ -2,11 +2,28 @@ import React from "react";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import { useDispatch } from "react-redux";
+import { fetchProductDetails } from "@/store/shop/product-slice";
+import { toast } from "sonner";
 
 export default function ShoppingProductTile({ product }) {
+  const dispatch = useDispatch();
+
+  async function handleGetProductDetails(id) {
+    dispatch(fetchProductDetails(id)).then((data) => {
+      if (data?.payload?.success) return;
+      else toast.error(data?.payload?.message);
+    });
+  }
+
   return (
     <Card className="w-full max-w-sm mx-auto">
-      <div className="relative">
+      <div
+        className="relative cursor-pointer"
+        onClick={() => {
+          handleGetProductDetails(product._id);
+        }}
+      >
         <img
           src={product?.image[0]}
           alt={product.title}
